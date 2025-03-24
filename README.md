@@ -7,6 +7,7 @@ URL shortening service built with Laravel 12, featuring both web interface and A
 - 🔗 Shorten long URLs to concise, shareable links
 - 🎯 Create custom aliases for your URLs
 - 📊 Track visit counts for each shortened URL
+- 🎨 Generate QR codes for shortened URLs
 - 🌐 Clean, responsive web interface
 - ⚡ RESTful API endpoints with Swagger documentation
 - ✨ Modern, type-safe codebase with strict typing
@@ -92,7 +93,8 @@ Response:
 ```json
 {
     "short_url": "http://localhost/s/abc123",
-    "original_url": "https://example.com"
+    "original_url": "https://example.com",
+    "qr_code": "data:image/png;base64,..." 
 }
 ```
 

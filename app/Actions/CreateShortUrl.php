@@ -18,7 +18,7 @@ class CreateShortUrl
         ]);
     }
 
-    public function getShortUrl(mixed $short_code): string
+    public function getShortUrl(string $short_code): string
     {
         return url("/s/{$short_code}");
     }

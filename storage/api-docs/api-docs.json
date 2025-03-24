@@ -55,6 +55,10 @@
                                         "original_url": {
                                             "type": "string",
                                             "example": "https://example.com"
+                                        },
+                                        "qr_code": {
+                                            "type": "string",
+                                            "example": "data:image/png;base64,..."
                                         }
                                     },
                                     "type": "object"

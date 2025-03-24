@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Actions\CreateQrCode;
 use App\Actions\CreateShortUrl;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreShortUrlRequest;
@@ -23,7 +24,8 @@ use OpenApi\Annotations as OA;
 class UrlShortenerController extends Controller
 {
     public function __construct(
-        private readonly CreateShortUrl $createShortUrl
+        private readonly CreateShortUrl $createShortUrl,
+        private readonly CreateQrCode $createQrCode,
     ) {}
 
     /**
@@ -46,7 +48,8 @@ class UrlShortenerController extends Controller
      *         description="URL shortened successfully",
      *         @OA\JsonContent(
      *             @OA\Property(property="short_url", type="string", example="http://localhost/s/abc123"),
-     *             @OA\Property(property="original_url", type="string", example="https://example.com")
+     *             @OA\Property(property="original_url", type="string", example="https://example.com"),
+     *             @OA\Property(property="qr_code", type="string", example="data:image/png;base64,...")
      *         )
      *     ),
      *     @OA\Response(
@@ -65,10 +68,12 @@ class UrlShortenerController extends Controller
             $request->url,
             $request->custom_alias
         );
+        $shortUrlValue = $this->createShortUrl->getShortUrl($shortUrl->short_code);
 
         return new JsonResponse([
-            'short_url' => url("/s/{$shortUrl->short_code}"),
-            'original_url' => $shortUrl->original_url
+            'short_url' => $shortUrlValue,
+            'original_url' => $shortUrl->original_url,
+            'qr_code' => $this->createQrCode->execute($shortUrlValue),
         ], JsonResponse::HTTP_CREATED);
     }
 }

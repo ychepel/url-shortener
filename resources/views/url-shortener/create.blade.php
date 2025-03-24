@@ -31,9 +31,12 @@
                     <span class="font-medium">Short URL:</span>
                     <a href="{{ $shortUrl }}" class="break-all hover:text-green-800" target="_blank" id="shortUrl">{{ $shortUrl }}</a>
                 </div>
-                <button onclick="copyToClipboard()" class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">
+                <button onclick="copyToClipboard()" class="mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">
                     Copy Short URL
                 </button>
+                <div class="mt-4 flex justify-center items-center">
+                    <img src="{{ $qrCode }}" alt="QR Code" title="{{ $shortUrl }}" class="w-64"/>
+                </div>
             </div>
         @endif
 
@@ -41,9 +44,9 @@
             @csrf
             <div>
                 <label for="url" class="block text-sm font-medium text-gray-700 mb-1">Enter URL to shorten</label>
-                <input type="url" 
-                       name="url" 
-                       id="url" 
+                <input type="url"
+                       name="url"
+                       id="url"
                        required
                        value="{{ old('url') }}"
                        placeholder="https://example.com"
@@ -54,8 +57,8 @@
                     Custom alias (optional)
                     <span class="text-gray-500 text-xs">3-20 characters, letters, numbers, hyphens, and underscores only</span>
                 </label>
-                <input type="text" 
-                       name="custom_alias" 
+                <input type="text"
+                       name="custom_alias"
                        id="custom_alias"
                        value="{{ old('custom_alias') }}"
                        pattern="[a-zA-Z0-9-_]+"
