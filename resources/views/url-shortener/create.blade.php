@@ -45,7 +45,23 @@
                        name="url" 
                        id="url" 
                        required
+                       value="{{ old('url') }}"
                        placeholder="https://example.com"
+                       class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <label for="custom_alias" class="block text-sm font-medium text-gray-700 mb-1">
+                    Custom alias (optional)
+                    <span class="text-gray-500 text-xs">3-20 characters, letters, numbers, hyphens, and underscores only</span>
+                </label>
+                <input type="text" 
+                       name="custom_alias" 
+                       id="custom_alias"
+                       value="{{ old('custom_alias') }}"
+                       pattern="[a-zA-Z0-9-_]+"
+                       minlength="3"
+                       maxlength="20"
+                       placeholder="my-custom-url"
                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
             <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition">

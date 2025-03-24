@@ -19,7 +19,10 @@ class UrlShortenerWebController extends Controller
 
     public function store(StoreShortUrlRequest $request): View
     {
-        $shortUrl = $this->createShortUrl->execute($request->url);
+        $shortUrl = $this->createShortUrl->execute(
+            $request->url,
+            $request->custom_alias
+        );
 
         return view('url-shortener.create', [
             'shortUrl' => url("/s/{$shortUrl->short_code}"),

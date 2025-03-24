@@ -7,11 +7,11 @@ use Illuminate\Support\Str;
 
 class CreateShortUrl
 {
-    public function execute(string $url): ShortUrl
+    public function execute(string $url, ?string $customAlias = null): ShortUrl
     {
         return ShortUrl::create([
             'original_url' => $url,
-            'short_code' => $this->generateUniqueShortCode(),
+            'short_code' => $customAlias ?? $this->generateUniqueShortCode(),
             'visits' => 0
         ]);
     }
