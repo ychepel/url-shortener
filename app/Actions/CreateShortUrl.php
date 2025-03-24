@@ -18,6 +18,11 @@ class CreateShortUrl
         ]);
     }
 
+    public function getShortUrl(mixed $short_code): string
+    {
+        return url("/s/{$short_code}");
+    }
+
     private function generateUniqueShortCode(): string
     {
         do {

@@ -27,7 +27,7 @@ class UrlShortenerWebController extends Controller
         );
 
         return view('url-shortener.create', [
-            'shortUrl' => url("/s/{$shortUrl->short_code}"),
+            'shortUrl' => $this->createShortUrl->getShortUrl($shortUrl->short_code),
             'originalUrl' => $shortUrl->original_url,
         ]);
     }

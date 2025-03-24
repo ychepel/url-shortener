@@ -23,7 +23,7 @@ class UrlShortenerController extends Controller
         $shortUrl = $this->createShortUrl->execute($request->url);
 
         return new JsonResponse([
-            'short_url' => url("/s/{$shortUrl->short_code}"),
+            'short_url' => $this->createShortUrl->getShortUrl($shortUrl->short_code),
             'original_url' => $shortUrl->original_url,
         ], JsonResponse::HTTP_CREATED);
     }
