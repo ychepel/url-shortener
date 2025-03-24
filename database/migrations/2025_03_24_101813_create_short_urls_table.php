@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('short_urls', function (Blueprint $table) {
+        Schema::create('short_urls', function (Blueprint $table): void {
             $table->id();
             $table->string('original_url');
             $table->string('short_code')->unique();
