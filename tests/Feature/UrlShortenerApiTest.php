@@ -8,7 +8,7 @@ use App\Models\ShortUrl;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UrlShortenerTest extends TestCase
+class UrlShortenerApiTest extends TestCase
 {
     use RefreshDatabase;
 
