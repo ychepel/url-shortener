@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Actions\CreateShortUrl;
+use App\Actions\ResolveShortUrl;
 use App\Http\Requests\StoreShortUrlRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -12,7 +13,8 @@ use Illuminate\View\View;
 class UrlShortenerWebController extends Controller
 {
     public function __construct(
-        private readonly CreateShortUrl $createShortUrl
+        private readonly CreateShortUrl $createShortUrl,
+        private readonly ResolveShortUrl $resolveShortUrl
     ) {}
 
     public function create(): View

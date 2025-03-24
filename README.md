@@ -10,6 +10,7 @@ URL shortening service built with Laravel 12, featuring both web interface and A
 - 🌐 Clean, responsive web interface
 - ⚡ RESTful API endpoints with Swagger documentation
 - ✨ Modern, type-safe codebase with strict typing
+- 🧹 Automatic cleanup of old URLs
 
 ## Requirements
 
@@ -68,7 +69,7 @@ cp .env.example .env
 
 ### API Documentation
 
-Visit `http://localhost/docs/api` to access the interactive Swagger documentation, where you can:
+Visit `http://localhost/api/documentation` to access the interactive Swagger documentation, where you can:
 - View all available API endpoints
 - Test API endpoints directly from the browser
 - See request/response schemas
@@ -95,6 +96,26 @@ Response:
 }
 ```
 
+### Maintenance
+
+The application includes a command to clean up old URLs:
+
+```bash
+# Clean up URLs older than 7 days (default)
+./vendor/bin/sail artisan short-urls:cleanup
+
+# Clean up URLs older than X days
+./vendor/bin/sail artisan short-urls:cleanup --days=30
+```
+
+This command soft deletes old URLs, which means:
+- They won't be accessible anymore
+- They remain in the database (can be restored if needed)
+- Their short codes can't be reused
+- Historical data is preserved
+
+You can schedule this command in the Laravel task scheduler to run automatically.
+
 ## Testing
 
 Run the test suite:
@@ -111,6 +132,7 @@ The application follows modern Laravel practices:
 - Type-safe code with strict typing
 - Tailwind CSS for styling
 - OpenAPI/Swagger documentation
+- Soft deletes for data integrity
 
 ## License
 

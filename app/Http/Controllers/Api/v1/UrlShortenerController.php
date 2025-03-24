@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\CreateShortUrl;
-use App\Actions\ResolveShortUrl;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreShortUrlRequest;
 use Illuminate\Http\JsonResponse;
@@ -24,8 +23,7 @@ use OpenApi\Annotations as OA;
 class UrlShortenerController extends Controller
 {
     public function __construct(
-        private readonly CreateShortUrl $createShortUrl,
-        private readonly ResolveShortUrl $resolveShortUrl
+        private readonly CreateShortUrl $createShortUrl
     ) {}
 
     /**
