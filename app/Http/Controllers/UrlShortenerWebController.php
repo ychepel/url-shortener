@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Actions\CreateShortUrl;
@@ -26,7 +28,7 @@ class UrlShortenerWebController extends Controller
 
         return view('url-shortener.create', [
             'shortUrl' => url("/s/{$shortUrl->short_code}"),
-            'originalUrl' => $shortUrl->original_url
+            'originalUrl' => $shortUrl->original_url,
         ]);
     }
 }

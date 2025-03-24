@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Actions;
 
 use App\Models\ShortUrl;
@@ -12,7 +14,7 @@ class CreateShortUrl
         return ShortUrl::create([
             'original_url' => $url,
             'short_code' => $customAlias ?? $this->generateUniqueShortCode(),
-            'visits' => 0
+            'visits' => 0,
         ]);
     }
 

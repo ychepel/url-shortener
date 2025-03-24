@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\Models\ShortUrl;
@@ -13,24 +15,24 @@ class UrlShortenerTest extends TestCase
     public function test_can_create_short_url(): void
     {
         $response = $this->postJson('/api/v1/shorten', [
-            'url' => 'https://example.com'
+            'url' => 'https://example.com',
         ]);
 
         $response->assertStatus(201)
             ->assertJsonStructure([
                 'short_url',
-                'original_url'
+                'original_url',
             ]);
 
         $this->assertDatabaseHas('short_urls', [
-            'original_url' => 'https://example.com'
+            'original_url' => 'https://example.com',
         ]);
     }
 
     public function test_validates_invalid_url(): void
     {
         $response = $this->postJson('/api/v1/shorten', [
-            'url' => 'not-a-valid-url'
+            'url' => 'not-a-valid-url',
         ]);
 
         $response->assertStatus(422)
@@ -48,7 +50,7 @@ class UrlShortenerTest extends TestCase
     public function test_validates_url_minimum_length(): void
     {
         $response = $this->postJson('/api/v1/shorten', [
-            'url' => 'h://a'
+            'url' => 'h://a',
         ]);
 
         $response->assertStatus(422)
@@ -57,10 +59,10 @@ class UrlShortenerTest extends TestCase
 
     public function test_validates_url_maximum_length(): void
     {
-        $longUrl = 'https://example.com/' . str_repeat('a', 2048);
+        $longUrl = 'https://example.com/'.str_repeat('a', 2048);
 
         $response = $this->postJson('/api/v1/shorten', [
-            'url' => $longUrl
+            'url' => $longUrl,
         ]);
 
         $response->assertStatus(422)
@@ -70,10 +72,10 @@ class UrlShortenerTest extends TestCase
     public function test_generates_unique_short_codes(): void
     {
         $response1 = $this->postJson('/api/v1/shorten', [
-            'url' => 'https://example1.com'
+            'url' => 'https://example1.com',
         ]);
         $response2 = $this->postJson('/api/v1/shorten', [
-            'url' => 'https://example2.com'
+            'url' => 'https://example2.com',
         ]);
 
         $shortUrls = ShortUrl::orderBy('id')->get();
@@ -86,7 +88,7 @@ class UrlShortenerTest extends TestCase
         $shortUrl = ShortUrl::create([
             'original_url' => 'https://example.com',
             'short_code' => 'abc123',
-            'visits' => 0
+            'visits' => 0,
         ]);
 
         $response = $this->get("/s/{$shortUrl->short_code}");
@@ -109,7 +111,7 @@ class UrlShortenerTest extends TestCase
         $shortUrl = ShortUrl::create([
             'original_url' => 'https://example.com',
             'short_code' => 'abc123',
-            'visits' => 5
+            'visits' => 5,
         ]);
 
         $this->get("/s/{$shortUrl->short_code}");

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use App\Models\ShortUrl;
@@ -23,8 +25,8 @@ class StoreShortUrlRequest extends FormRequest
                 'min:3',
                 'max:20',
                 'regex:/^[a-zA-Z0-9-_]+$/',
-                Rule::unique(ShortUrl::class, 'short_code')
-            ]
+                Rule::unique(ShortUrl::class, 'short_code'),
+            ],
         ];
     }
 
@@ -32,7 +34,7 @@ class StoreShortUrlRequest extends FormRequest
     {
         return [
             'custom_alias.regex' => 'Custom alias can only contain letters, numbers, hyphens, and underscores.',
-            'custom_alias.unique' => 'This custom alias is already taken. Please choose another one.'
+            'custom_alias.unique' => 'This custom alias is already taken. Please choose another one.',
         ];
     }
 }

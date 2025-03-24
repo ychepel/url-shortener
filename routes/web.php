@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\Api\v1\UrlShortenerController;
 use App\Http\Controllers\UrlShortenerWebController;
 use Illuminate\Support\Facades\Route;

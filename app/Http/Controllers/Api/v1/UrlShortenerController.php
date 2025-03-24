@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\CreateShortUrl;
@@ -22,7 +24,7 @@ class UrlShortenerController extends Controller
 
         return new JsonResponse([
             'short_url' => url("/s/{$shortUrl->short_code}"),
-            'original_url' => $shortUrl->original_url
+            'original_url' => $shortUrl->original_url,
         ], JsonResponse::HTTP_CREATED);
     }
 
