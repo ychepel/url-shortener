@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\CreateShortUrl;
 use App\Actions\ResolveShortUrl;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreShortUrlRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;

@@ -12,7 +12,7 @@ class UrlShortenerTest extends TestCase
 
     public function test_can_create_short_url(): void
     {
-        $response = $this->postJson('/api/shorten', [
+        $response = $this->postJson('/api/v1/shorten', [
             'url' => 'https://example.com'
         ]);
 
@@ -29,7 +29,7 @@ class UrlShortenerTest extends TestCase
 
     public function test_validates_invalid_url(): void
     {
-        $response = $this->postJson('/api/shorten', [
+        $response = $this->postJson('/api/v1/shorten', [
             'url' => 'not-a-valid-url'
         ]);
 
@@ -39,7 +39,7 @@ class UrlShortenerTest extends TestCase
 
     public function test_requires_url_parameter(): void
     {
-        $response = $this->postJson('/api/shorten', []);
+        $response = $this->postJson('/api/v1/shorten', []);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['url']);
@@ -47,7 +47,7 @@ class UrlShortenerTest extends TestCase
 
     public function test_validates_url_minimum_length(): void
     {
-        $response = $this->postJson('/api/shorten', [
+        $response = $this->postJson('/api/v1/shorten', [
             'url' => 'h://a'
         ]);
 
@@ -58,8 +58,8 @@ class UrlShortenerTest extends TestCase
     public function test_validates_url_maximum_length(): void
     {
         $longUrl = 'https://example.com/' . str_repeat('a', 2048);
-        
-        $response = $this->postJson('/api/shorten', [
+
+        $response = $this->postJson('/api/v1/shorten', [
             'url' => $longUrl
         ]);
 
@@ -69,10 +69,10 @@ class UrlShortenerTest extends TestCase
 
     public function test_generates_unique_short_codes(): void
     {
-        $response1 = $this->postJson('/api/shorten', [
+        $response1 = $this->postJson('/api/v1/shorten', [
             'url' => 'https://example1.com'
         ]);
-        $response2 = $this->postJson('/api/shorten', [
+        $response2 = $this->postJson('/api/v1/shorten', [
             'url' => 'https://example2.com'
         ]);
 
