@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\CreateShortUrl;
 use App\Http\Requests\StoreShortUrlRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class UrlShortenerWebController extends Controller
@@ -30,5 +31,12 @@ class UrlShortenerWebController extends Controller
             'shortUrl' => $this->createShortUrl->getShortUrl($shortUrl->short_code),
             'originalUrl' => $shortUrl->original_url,
         ]);
+    }
+
+    public function redirect(string $shortCode): RedirectResponse
+    {
+        $shortUrl = $this->resolveShortUrl->execute($shortCode);
+
+        return redirect($shortUrl->original_url);
     }
 }

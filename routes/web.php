@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\Api\v1\UrlShortenerController;
 use App\Http\Controllers\UrlShortenerWebController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,4 +11,4 @@ Route::controller(UrlShortenerWebController::class)->group(function () {
     Route::post('/shorten', 'store')->name('url.shorten');
 });
 
-Route::get('/s/{shortCode}', [UrlShortenerController::class, 'redirect']);
+Route::get('/s/{shortCode}', [UrlShortenerWebController::class, 'redirect']);

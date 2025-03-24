@@ -8,7 +8,7 @@ URL shortening service built with Laravel 12, featuring both web interface and A
 - 🎯 Create custom aliases for your URLs
 - 📊 Track visit counts for each shortened URL
 - 🌐 Clean, responsive web interface
-- ⚡ RESTful API endpoints
+- ⚡ RESTful API endpoints with Swagger documentation
 - ✨ Modern, type-safe codebase with strict typing
 
 ## Requirements
@@ -51,6 +51,11 @@ cp .env.example .env
 ./vendor/bin/sail artisan migrate
 ```
 
+7. Generate API documentation:
+```bash
+./vendor/bin/sail artisan l5-swagger:generate
+```
+
 ## Usage
 
 ### Web Interface
@@ -60,6 +65,14 @@ cp .env.example .env
 3. (Optional) Provide a custom alias
 4. Click "Shorten URL"
 5. Copy and share your shortened URL
+
+### API Documentation
+
+Visit `http://localhost/docs/api` to access the interactive Swagger documentation, where you can:
+- View all available API endpoints
+- Test API endpoints directly from the browser
+- See request/response schemas
+- Try out the API with example values
 
 ### API Endpoints
 
@@ -97,6 +110,7 @@ The application follows modern Laravel practices:
 - Feature Tests
 - Type-safe code with strict typing
 - Tailwind CSS for styling
+- OpenAPI/Swagger documentation
 
 ## License
 
